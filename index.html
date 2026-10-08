@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>토익 접·전·부 100제 마스터 챌린지</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    @keyframes bounce-gentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .animate-bounce-gentle {
+      animation: bounce-gentle 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col antialiased">
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="app.showHome()">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-lg shadow-md shadow-indigo-100">
+          T
+        </div>
+        <div>
+          <h1 class="text-base font-extrabold text-slate-900 leading-tight">토익 접·전·부 100제</h1>
+          <p class="text-xs text-slate-500 font-semibold">단계별 완벽 마스터 게이트</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="app.showCheatSheet()" class="text-xs md:text-sm font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-200/60 transition-colors">
+          <i class="fa-solid fa-book-bookmark mr-1"></i>치트시트
+        </button>
+        <button onclick="app.resetAllProgressModal()" class="text-xs text-slate-400 hover:text-rose-600 p-2 transition-colors" title="처음부터 다시 시작">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="bg-slate-900 text-white py-3 border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="grid grid-cols-3 gap-2 text-center text-xs font-semibold">
+        <div id="step-nav-1" class="py-1 px-2 rounded-lg bg-indigo-600 text-white flex items-center justify-center gap-1.5">
+          <span>Step 1</span>
+          <span class="text-[10px] opacity-80">(0.5초 소팅)</span>
+          <i id="step-nav-icon-1" class="fa-solid fa-clock text-amber-300 ml-0.5"></i>
+        </div>
+        <div id="step-nav-2" class="py-1 px-2 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center gap-1.5">
+          <span>Step 2</span>
+          <span class="text-[10px] opacity-80">(짝꿍 매칭)</span>
+          <i id="step-nav-icon-2" class="fa-solid fa-lock text-slate-500 ml-0.5"></i>
+        </div>
+        <div id="step-nav-3" class="py-1 px-2 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center gap-1.5">
+          <span>Step 3</span>
+          <span class="text-[10px] opacity-80">(Part 5 실전)</span>
+          <i id="step-nav-icon-3" class="fa-solid fa-lock text-slate-500 ml-0.5"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="flex-1 max-w-4xl w-full mx-auto p-4 md:py-6 flex flex-col justify-center">
+
+    <div id="view-home" class="space-y-6">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
+        <div class="relative z-10 max-w-xl">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30 mb-3">
+            <i class="fa-solid fa-shield-halved"></i> 100% 마스터 게이트 시스템
+          </span>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2">Step 1을 완전히 마스터해야 Step 2가 열립니다</h2>
+          <p class="text-slate-300 text-xs md:text-sm leading-relaxed mb-6">
+            1단계(35문항)를 다 풀고 틀린 오답을 100% 클리어할 때까지 다음 단계로 넘어갈 수 없습니다. 
+            구조 감각을 빈틈없이 채우고 실전 점수로 연결하세요!
+          </p>
+          <div class="flex items-center gap-3">
+            <button onclick="app.startCurrentActiveStage()" class="px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm shadow-md transition-all active:scale-95 flex items-center">
+              <i class="fa-solid fa-play mr-2"></i> <span id="hero-action-btn-text">Step 1 도전하기</span>
+            </button>
+            <span id="hero-status-pill" class="text-xs text-indigo-200 bg-white/10 px-3 py-2 rounded-xl font-semibold">
+              Step 1 진행 중 (0 / 35)
+            </span>
+          </div>
+        </div>
+        <div class="absolute -right-6 -bottom-10 opacity-10 text-white text-[180px] pointer-events-none font-black">
+          100
+        </div>
+      </div>
+
+      <!-- Stage Gate Cards -->
+      <div class="space-y-4">
+        
+        <!-- Stage 1 Card -->
+        <div id="card-stage-1" onclick="app.tryStartStage(1)" class="cursor-pointer bg-white p-5 rounded-2xl border-2 border-indigo-500 shadow-md transition-all relative overflow-hidden">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div id="icon-stage-1" class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-black text-lg">
+                1
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-base md:text-lg font-bold text-slate-900">Step 1: 0.5초 품사 소팅</h3>
+                  <span id="badge-stage-1" class="px-2 py-0.5 rounded text-[11px] font-extrabold bg-indigo-100 text-indigo-700">진행 중</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">접속사(+S+V) vs 전치사(+N) vs 접속부사(단독) 순간 감별 35제</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <span id="progress-stage-1" class="text-sm font-black text-indigo-600">0 / 35</span>
+              <p class="text-[11px] text-slate-400 font-semibold">완벽 클리어 필요</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 2 Card (Locked initially) -->
+        <div id="card-stage-2" onclick="app.tryStartStage(2)" class="cursor-not-allowed bg-slate-50/80 p-5 rounded-2xl border-2 border-dashed border-slate-200 transition-all relative opacity-75">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div id="icon-stage-2" class="w-12 h-12 rounded-xl bg-slate-200 text-slate-400 flex items-center justify-center font-black text-lg">
+                <i class="fa-solid fa-lock text-base"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 id="title-stage-2" class="text-base md:text-lg font-bold text-slate-400">Step 2: 짝꿍 뜻 &amp; 품사 매칭</h3>
+                  <span id="badge-stage-2" class="px-2 py-0.5 rounded text-[11px] font-extrabold bg-slate-200 text-slate-500">잠김 🔒</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">Because vs Due to, While vs During 짝꿍 대조 35제</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <span id="progress-stage-2" class="text-sm font-black text-slate-400">0 / 35</span>
+              <p class="text-[11px] text-slate-400 font-semibold">Step 1 완료 시 해제</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 3 Card (Locked initially) -->
+        <div id="card-stage-3" onclick="app.tryStartStage(3)" class="cursor-not-allowed bg-slate-50/80 p-5 rounded-2xl border-2 border-dashed border-slate-200 transition-all relative opacity-75">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div id="icon-stage-3" class="w-12 h-12 rounded-xl bg-slate-200 text-slate-400 flex items-center justify-center font-black text-lg">
+                <i class="fa-solid fa-lock text-base"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 id="title-stage-3" class="text-base md:text-lg font-bold text-slate-400">Step 3: 실전 Part 5 문장 스캔</h3>
+                  <span id="badge-stage-3" class="px-2 py-0.5 rounded text-[11px] font-extrabold bg-slate-200 text-slate-500">잠김 🔒</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">빈칸 뒤 구조로 5초 컷! 토익 실전문맥 30제</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <span id="progress-stage-3" class="text-sm font-black text-slate-400">0 / 30</span>
+              <p class="text-[11px] text-slate-400 font-semibold">Step 2 완료 시 해제</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Tips Card -->
+      <div class="bg-indigo-50/60 border border-indigo-100 rounded-2xl p-4 text-xs text-indigo-900 flex items-start gap-3">
+        <i class="fa-solid fa-circle-info text-indigo-600 mt-0.5 text-sm"></i>
+        <div class="leading-relaxed">
+          <strong>학습 팁:</strong> 한 단계(Step)를 완료했을 때 오답이 1개라도 발생하면, 
+          자동으로 <strong>[오답 클리어 모드]</strong>로 진입하여 틀린 문제를 다시 풀게 됩니다.
+          모든 문제를 완전히 맞혀야 다음 단계 문이 활짝 열립니다!
+        </div>
+      </div>
+
+    </div>
+
+    <div id="view-quiz" class="hidden flex-col items-center">
+      <div class="w-full bg-white rounded-3xl border border-slate-200/90 shadow-xl p-5 md:p-8 relative">
+        
+        <!-- Quiz Stage Header -->
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+          <div class="flex items-center space-x-2">
+            <button onclick="app.showHome()" class="text-slate-400 hover:text-slate-700 text-sm font-semibold p-1" title="홈으로 나가기">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <span id="quiz-stage-badge" class="px-2.5 py-1 rounded-full text-xs font-black bg-indigo-100 text-indigo-700">
+              STEP 1
+            </span>
+            <span id="quiz-mode-pill" class="hidden px-2.5 py-1 rounded-full text-xs font-black bg-rose-100 text-rose-700">
+              오답 재도전 모드
+            </span>
+            <span id="quiz-counter" class="text-xs font-extrabold text-slate-500">
+              Q. 1 / 35
+            </span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span id="quiz-streak" class="text-xs font-extrabold text-amber-500 flex items-center bg-amber-50 px-2 py-1 rounded-lg">
+              <i class="fa-solid fa-fire mr-1"></i> 0 콤보
+            </span>
+          </div>
+        </div>
+
+        <!-- Question Body Area -->
+        <div class="min-h-[140px] flex flex-col justify-center items-center text-center px-2 py-4">
+          <span id="quiz-instruction" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md uppercase tracking-wider mb-3">
+            품사를 선택하세요
+          </span>
+          <h2 id="quiz-question-text" class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-snug">
+            Despite
+          </h2>
+          <p id="quiz-subtext" class="text-sm text-slate-500 mt-2 font-medium">
+            한국어 뜻: ~에도 불구하고
+          </p>
+        </div>
+
+        <!-- Multiple Choice Options -->
+        <div id="quiz-options-container" class="grid grid-cols-1 gap-3 mt-4">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Immediate Feedback Box -->
+        <div id="quiz-feedback-box" class="hidden mt-6 p-4 rounded-2xl border transition-all text-left">
+          <div class="flex items-start gap-3">
+            <div id="feedback-icon" class="text-2xl mt-0.5"></div>
+            <div class="flex-1">
+              <h4 id="feedback-title" class="text-sm font-extrabold"></h4>
+              <p id="feedback-desc" class="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed"></p>
+              <div id="feedback-point" class="mt-2 text-xs font-semibold bg-white/70 p-2.5 rounded-xl border border-slate-200/60 text-slate-700"></div>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-end">
+            <button id="next-question-btn" onclick="app.nextQuestion()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs md:text-sm rounded-xl shadow-md transition-all flex items-center">
+              다음 문제 <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="view-stage-result" class="hidden flex-col items-center">
+      <div class="w-full max-w-lg bg-white rounded-3xl border border-slate-200/90 shadow-xl p-6 md:p-8 text-center">
+        
+        <div id="gate-icon" class="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-3xl mb-4 bg-amber-50 text-amber-600">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        
+        <h2 id="gate-title" class="text-2xl font-black text-slate-900 mb-1">Step 1 1차 풀이 완료!</h2>
+        <p id="gate-desc" class="text-xs md:text-sm text-slate-500 mb-6">오답이 발생했습니다. 오답을 마스터해야 다음 단계가 열립니다.</p>
+
+        <!-- Score Overview Grid -->
+        <div class="grid grid-cols-2 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-6 text-center">
+          <div>
+            <span class="text-[11px] font-bold text-slate-400 block mb-0.5">최초 정답 수</span>
+            <span id="gate-score-text" class="text-xl font-black text-indigo-600">31 / 35</span>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-slate-400 block mb-0.5">남은 오답 수</span>
+            <span id="gate-wrong-count" class="text-xl font-black text-rose-500">4개</span>
+          </div>
+        </div>
+
+        <div id="gate-actions" class="space-y-3">
+          <!-- Button: Clear wrong answers -->
+          <button id="btn-clear-wrongs" onclick="app.startWrongRetryLoop()" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-xl shadow-md text-sm transition-all flex items-center justify-center">
+            <i class="fa-solid fa-rotate-right mr-2"></i> <span id="btn-clear-wrongs-label">오답 4문제 바로잡고 마스터하기</span>
+          </button>
+          
+          <!-- Button: Next Stage (Only if 0 errors) -->
+          <button id="btn-next-stage" onclick="app.proceedToNextStage()" class="hidden w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl shadow-md text-sm transition-all flex items-center justify-center">
+            <i class="fa-solid fa-unlock mr-2"></i> <span id="btn-next-stage-label">Step 2 잠금 해제 &amp; 이동</span>
+          </button>
+
+          <button onclick="app.showHome()" class="w-full py-2.5 text-slate-400 hover:text-slate-700 font-semibold text-xs transition-colors">
+            홈 화면으로 가기
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="view-cheat-sheet" class="hidden">
+      <div class="bg-white rounded-3xl border border-slate-200/90 shadow-xl p-5 md:p-8">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <h2 class="text-lg font-bold text-slate-900">토익 빈출 접·전·부 핵심 치트시트</h2>
+          </div>
+          <button onclick="app.showHome()" class="text-slate-400 hover:text-slate-700 p-1.5">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <div class="space-y-6 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar text-sm">
+          <div>
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 mb-2.5 flex items-center">
+              <i class="fa-solid fa-scale-balanced mr-1.5"></i> 의미별 짝꿍 (접속사 vs 전치사)
+            </h3>
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left border-collapse text-xs md:text-sm">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600">
+                    <th class="p-3">의미 구분</th>
+                    <th class="p-3 text-indigo-700">접속사 (+ S + V)</th>
+                    <th class="p-3 text-emerald-700">전치사 (+ N / -ing)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-700">
+                  <tr>
+                    <td class="p-3 font-semibold bg-slate-50/50">이유 (~때문에)</td>
+                    <td class="p-3">because, since, as, now that</td>
+                    <td class="p-3">because of, due to, owing to, on account of</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold bg-slate-50/50">양보 (~에도 불구하고)</td>
+                    <td class="p-3">although, even though, though, while</td>
+                    <td class="p-3">despite, in spite of, notwithstanding</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold bg-slate-50/50">시간 (~동안)</td>
+                    <td class="p-3">while, as</td>
+                    <td class="p-3">during (+특정명사), for (+숫자기간)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold bg-slate-50/50">조건 (~하는 경우에)</td>
+                    <td class="p-3">in case (that), in the event (that)</td>
+                    <td class="p-3">in case of, in the event of</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold bg-slate-50/50">목적 (~하기 위해)</td>
+                    <td class="p-3">so that, in order that</td>
+                    <td class="p-3">for, with a view to (-ing)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bg-amber-50/70 border border-amber-200 p-4 rounded-xl">
+            <h4 class="text-xs font-bold text-amber-900 mb-1 flex items-center">
+              <i class="fa-solid fa-arrows-split-up-and-left mr-1.5 text-amber-600"></i> 양다리 단어 (접속사 &amp; 전치사 겸용)
+            </h4>
+            <p class="text-xs text-amber-800 leading-relaxed">
+              <strong>until, since, before, after, as</strong> : 뒤에 S+V 절이 와도 맞고, 명사구가 와도 문법적으로 성립합니다.
+            </p>
+          </div>
+
+          <div class="bg-rose-50/70 border border-rose-200 p-4 rounded-xl">
+            <h4 class="text-xs font-bold text-rose-900 mb-1 flex items-center">
+              <i class="fa-solid fa-triangle-exclamation mr-1.5 text-rose-600"></i> 접속부사 함정 (두 절을 콤마로 연결 불가)
+            </h4>
+            <p class="text-xs text-rose-800 leading-relaxed">
+              <strong>however, therefore, furthermore, moreover, nevertheless, consequently, instead, meanwhile</strong><br>
+              ※ 이 단어들은 부사이므로 [S+V, however S+V] 구조를 만들 수 없습니다. 세미콜론(;) 뒤나 마침표 뒤에 단독으로 쓰입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 text-center py-3 text-xs text-slate-400 font-medium">
+    TOEIC Part 5 Grammatical Mastery System · 100 Questions Database
+  </footer>
+
+  <script>
+    const fullDatabase = [
+      /* ================= STEP 1: 품사 분류 (1 ~ 35번) ================= */
+      {
+        id: 1, stage: 1,
+        prompt: "despite",
+        subtext: "한국어 뜻: ~에도 불구하고",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "despite는 전치사입니다. 뒤에 절이 올 수 없으며 명사나 동명사구가 따라옵니다. (동의어: in spite of)"
+      },
+      {
+        id: 2, stage: 1,
+        prompt: "although",
+        subtext: "한국어 뜻: 비록 ~일지라도",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "although는 부사절 접속사로 뒤에 주어+동사의 완전한 절을 이끕니다."
+      },
+      {
+        id: 3, stage: 1,
+        prompt: "however",
+        subtext: "한국어 뜻: 그러나, 하지만",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "however는 문장 연결 기능이 없는 접속부사입니다. 콤마와 함께 단독으로 쓰입니다."
+      },
+      {
+        id: 4, stage: 1,
+        prompt: "due to",
+        subtext: "한국어 뜻: ~때문에",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "due to는 이유를 나타내는 전치사구입니다. 뒤에 [S+V]가 올 수 없습니다."
+      },
+      {
+        id: 5, stage: 1,
+        prompt: "because",
+        subtext: "한국어 뜻: ~때문에",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "because는 부사절 접속사이므로 뒤에 주어와 동사를 동반합니다."
+      },
+      {
+        id: 6, stage: 1,
+        prompt: "therefore",
+        subtext: "한국어 뜻: 그러므로, 따라서",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "therefore는 접속부사입니다. 접속사가 아니므로 단독으로 두 절을 이을 수 없습니다."
+      },
+      {
+        id: 7, stage: 1,
+        prompt: "during",
+        subtext: "한국어 뜻: ~동안에",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "during은 전치사로 뒤에 특정 기간 명사(the vacation, the meeting)가 옵니다."
+      },
+      {
+        id: 8, stage: 1,
+        prompt: "while",
+        subtext: "한국어 뜻: ~하는 동안에 / 반면에",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "while은 부사절 접속사이므로 주어+동사나 축약된 분사구문(-ing)이 옵니다."
+      },
+      {
+        id: 9, stage: 1,
+        prompt: "furthermore",
+        subtext: "한국어 뜻: 게다가, 더욱이",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "furthermore는 정보 추가의 접속부사입니다."
+      },
+      {
+        id: 10, stage: 1,
+        prompt: "in spite of",
+        subtext: "한국어 뜻: ~에도 불구하고",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "in spite of는 3개 단어로 이루어진 대표 양보 전치사구입니다."
+      },
+      {
+        id: 11, stage: 1,
+        prompt: "unless",
+        subtext: "한국어 뜻: 만약 ~하지 않는다면",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "unless는 if not을 대체하는 조건의 부사절 접속사입니다."
+      },
+      {
+        id: 12, stage: 1,
+        prompt: "nevertheless",
+        subtext: "한국어 뜻: 그럼에도 불구하고",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "nevertheless는 접속사가 아니라 부사입니다. 절을 이끌 수 없습니다."
+      },
+      {
+        id: 13, stage: 1,
+        prompt: "owing to",
+        subtext: "한국어 뜻: ~때문에, ~의 탓으로",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "owing to는 이유 전치사입니다. (because of와 동일)"
+      },
+      {
+        id: 14, stage: 1,
+        prompt: "as soon as",
+        subtext: "한국어 뜻: ~하자마자",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "as soon as는 뒤에 주어+동사를 취하는 시간의 접속사입니다."
+      },
+      {
+        id: 15, stage: 1,
+        prompt: "meanwhile",
+        subtext: "한국어 뜻: 그동안에, 한편",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "meanwhile은 단독으로 콤마와 함께 쓰이는 접속부사입니다."
+      },
+      {
+        id: 16, stage: 1,
+        prompt: "in case of",
+        subtext: "한국어 뜻: ~의 경우에 대비하여",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "of로 끝나므로 전치사구입니다. (접속사는 in case that)"
+      },
+      {
+        id: 17, stage: 1,
+        prompt: "provided that",
+        subtext: "한국어 뜻: 만약 ~라면, ~라는 조건으로",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "provided (that)은 if와 대등한 조건 접속사입니다."
+      },
+      {
+        id: 18, stage: 1,
+        prompt: "consequently",
+        subtext: "한국어 뜻: 결과적으로, 따라서",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "consequently는 결과를 나타내는 접속부사입니다."
+      },
+      {
+        id: 19, stage: 1,
+        prompt: "on account of",
+        subtext: "한국어 뜻: ~때문에",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "on account of는 전치사구로 뒤에 명사구가 옵니다."
+      },
+      {
+        id: 20, stage: 1,
+        prompt: "now that",
+        subtext: "한국어 뜻: 이제 ~이므로, ~이기 때문에",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "now that은 현재 완료된 상황을 이유로 삼는 부사절 접속사입니다."
+      },
+      {
+        id: 21, stage: 1,
+        prompt: "otherwise",
+        subtext: "한국어 뜻: 그렇지 않으면",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "otherwise는 접속부사입니다."
+      },
+      {
+        id: 22, stage: 1,
+        prompt: "aside from",
+        subtext: "한국어 뜻: ~을 제외하고, ~외에도",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "aside from은 명사나 동명사를 취하는 전치사입니다."
+      },
+      {
+        id: 23, stage: 1,
+        prompt: "so that",
+        subtext: "한국어 뜻: ~하기 위해서, ~하도록",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "so that은 목적을 나타내는 접속사로 절 내에 can/will/may가 주로 쓰입니다."
+      },
+      {
+        id: 24, stage: 1,
+        prompt: "instead",
+        subtext: "한국어 뜻: 대신에",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "instead는 단독 부사입니다. 전치사로 쓰려면 of가 붙은 instead of가 되어야 합니다."
+      },
+      {
+        id: 25, stage: 1,
+        prompt: "notwithstanding",
+        subtext: "한국어 뜻: ~에도 불구하고",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "notwithstanding은 격식체 전치사로 명사구를 취합니다."
+      },
+      {
+        id: 26, stage: 1,
+        prompt: "in order that",
+        subtext: "한국어 뜻: ~하기 위하여",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "in order that은 뒤에 [S+V]가 오는 목적 접속사입니다."
+      },
+      {
+        id: 27, stage: 1,
+        prompt: "since",
+        subtext: "한국어 뜻: ~이래로 / ~때문에",
+        options: ["접속사와 전치사 모두 가능", "오직 접속사만 가능", "오직 전치사만 가능"],
+        answer: 0,
+        tip: "since는 '~이래로'일 때 전치사/접속사 둘 다 가능하며, '~때문에'일 때는 접속사로 쓰입니다."
+      },
+      {
+        id: 28, stage: 1,
+        prompt: "until",
+        subtext: "한국어 뜻: ~까지",
+        options: ["접속사와 전치사 모두 가능", "오직 접속사만 가능", "오직 전치사만 가능"],
+        answer: 0,
+        tip: "until은 뒤에 시점 명사가 와도 되고(전치사), S+V 절이 와도 되는(접속사) 대표 양다리 단어입니다."
+      },
+      {
+        id: 29, stage: 1,
+        prompt: "before",
+        subtext: "한국어 뜻: ~전에",
+        options: ["접속사와 전치사 모두 가능", "오직 접속사만 가능", "오직 전치사만 가능"],
+        answer: 0,
+        tip: "before는 접속사와 전치사 둘 다 가능한 대표 품사 겸용어입니다."
+      },
+      {
+        id: 30, stage: 1,
+        prompt: "even though",
+        subtext: "한국어 뜻: 비록 ~일지라도",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "even though는 양보의 부사절 접속사입니다."
+      },
+      {
+        id: 31, stage: 1,
+        prompt: "in addition",
+        subtext: "한국어 뜻: 게다가, 덧붙여",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "in addition은 부사구입니다. 전치사는 in addition to입니다."
+      },
+      {
+        id: 32, stage: 1,
+        prompt: "as long as",
+        subtext: "한국어 뜻: ~하는 한",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 1,
+        tip: "as long as는 조건의 부사절 접속사입니다."
+      },
+      {
+        id: 33, stage: 1,
+        prompt: "moreover",
+        subtext: "한국어 뜻: 게다가, 더욱이",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 2,
+        tip: "moreover는 접속부사이므로 문장을 콤마로 직접 이을 수 없습니다."
+      },
+      {
+        id: 34, stage: 1,
+        prompt: "except for",
+        subtext: "한국어 뜻: ~을 제외하고",
+        options: ["전치사 (+N / -ing)", "접속사 (+S+V)", "접속부사 (문장연결 불가)"],
+        answer: 0,
+        tip: "except for는 전치사구입니다. (접속사는 except that)"
+      },
+      {
+        id: 35, stage: 1,
+        prompt: "after",
+        subtext: "한국어 뜻: ~후에",
+        options: ["접속사와 전치사 모두 가능", "오직 접속사만 가능", "오직 전치사만 가능"],
+        answer: 0,
+        tip: "after는 뒤에 절(S+V)과 명사구(N) 모두 올 수 있는 겸용 단어입니다."
+      },
+
+      /* ================= STEP 2: 짝꿍 품사/의미 대조 (36 ~ 70번) ================= */
+      {
+        id: 36, stage: 2,
+        prompt: "'~때문에' 의미의 [접속사 (+ S + V)]는?",
+        subtext: "뒤에 완전한 문장(주어+동사)이 이어져야 합니다.",
+        options: ["Because", "Because of"],
+        answer: 0,
+        tip: "Because는 접속사(+S+V), Because of는 전치사(+N)입니다."
+      },
+      {
+        id: 37, stage: 2,
+        prompt: "'~때문에' 의미의 [전치사 (+ 명사구)]는?",
+        subtext: "뒤에 주어/동사가 아닌 명사나 동명사구가 옵니다.",
+        options: ["Since", "Due to"],
+        answer: 1,
+        tip: "Due to는 전치사, Since는 '~때문에' 의미일 때 접속사로만 쓰입니다."
+      },
+      {
+        id: 38, stage: 2,
+        prompt: "'~에도 불구하고' 의미의 [접속사 (+ S + V)]는?",
+        subtext: "양보를 나타내는 부사절을 이끕니다.",
+        options: ["Although", "Despite"],
+        answer: 0,
+        tip: "Although는 접속사, Despite는 전치사입니다."
+      },
+      {
+        id: 39, stage: 2,
+        prompt: "'~에도 불구하고' 의미의 [전치사 (+ 명사구)]는?",
+        subtext: "명사구 앞에 위치하여 반대 상황을 제시합니다.",
+        options: ["In spite of", "Even though"],
+        answer: 0,
+        tip: "In spite of는 전치사, Even though는 접속사입니다."
+      },
+      {
+        id: 40, stage: 2,
+        prompt: "'~하는 동안에' 의미의 [접속사 (+ S + V)]는?",
+        subtext: "동작이 진행되는 배경 절을 이끕니다.",
+        options: ["While", "During"],
+        answer: 0,
+        tip: "While은 접속사이므로 [S+V]가 오고, During은 전치사로 뒤에 특정 기간 명사가 옵니다."
+      },
+      {
+        id: 41, stage: 2,
+        prompt: "'특정 기간 동안'을 나타내는 [전치사 (+ 명사구)]는?",
+        subtext: "예: _____ the summer vacation",
+        options: ["During", "While"],
+        answer: 0,
+        tip: "During + 특정 기간 명사구 (the meeting, the conference)."
+      },
+      {
+        id: 42, stage: 2,
+        prompt: "'숫자 기간 동안'을 나타내는 [전치사 (+ 기간)]는?",
+        subtext: "예: _____ three weeks",
+        options: ["For", "While"],
+        answer: 0,
+        tip: "숫자 기간 앞에는 전치사 For를 사용합니다."
+      },
+      {
+        id: 43, stage: 2,
+        prompt: "'~하는 경우에' 의미의 [접속사 (+ S + V)]는?",
+        subtext: "뒤에 절이 이어집니다.",
+        options: ["In case (that)", "In case of"],
+        answer: 0,
+        tip: "In case (that)은 접속사, In case of는 전치사입니다."
+      },
+      {
+        id: 44, stage: 2,
+        prompt: "'~의 경우에' 의미의 [전치사 (+ 명사구)]는?",
+        subtext: "예: _____ an emergency, press the button.",
+        options: ["In case of", "In case"],
+        answer: 0,
+        tip: "전치사 of로 끝나는 In case of 뒤에는 명사(an emergency)가 옵니다."
+      },
+      {
+        id: 45, stage: 2,
+        prompt: "'~하기 위하여' 목적 의미의 [접속사 (+ S + can/will V)]는?",
+        subtext: "절을 이끄는 형태를 고르세요.",
+        options: ["So that", "In order to"],
+        answer: 0,
+        tip: "So that + S + V (접속사) / In order to + 동사원형 (to부정사구)"
+      },
+      {
+        id: 46, stage: 2,
+        prompt: "'~을 제외하고' 의미의 [접속사 (+ S + V)]는?",
+        subtext: "that절을 동반하여 예외 상황을 서술합니다.",
+        options: ["Except that", "Except for"],
+        answer: 0,
+        tip: "Except that은 접속사절을 이끌고, Except for는 명사구를 목적어로 취합니다."
+      },
+      {
+        id: 47, stage: 2,
+        prompt: "'~때문에' 의미의 전치사 짝꿍을 고르세요.",
+        subtext: "Because of와 같은 전치사 역할을 하는 것은?",
+        options: ["Owing to", "As"],
+        answer: 0,
+        tip: "Owing to는 전치사, As는 이유 접속사입니다."
+      },
+      {
+        id: 48, stage: 2,
+        prompt: "'비록 ~이지만' 양보 의미의 [접속사]는?",
+        subtext: "주어와 동사를 이끄는 단어입니다.",
+        options: ["Though", "Notwithstanding"],
+        answer: 0,
+        tip: "Though는 접속사, Notwithstanding은 전치사입니다."
+      },
+      {
+        id: 49, stage: 2,
+        prompt: "'~이 발생할 시에' [전치사 (+ 명사구)]는?",
+        subtext: "예: _____ a fire alarm",
+        options: ["In the event of", "In the event that"],
+        answer: 0,
+        tip: "In the event of + 명사 (전치사) / In the event that + S+V (접속사)"
+      },
+      {
+        id: 50, stage: 2,
+        prompt: "'~외에도 / 게다가' 전치사로 뒤에 명사를 취하는 것은?",
+        subtext: "예: _____ his salary, he gets bonuses.",
+        options: ["In addition to", "In addition"],
+        answer: 0,
+        tip: "In addition to는 전치사(to뒤에 명사/동명사), In addition은 단독 부사입니다."
+      },
+      {
+        id: 51, stage: 2,
+        prompt: "'이제 ~이므로' 이유를 나타내는 [접속사]는?",
+        subtext: "예: _____ you are here, let's start.",
+        options: ["Now that", "On account of"],
+        answer: 0,
+        tip: "Now that은 접속사(+S+V), On account of는 전치사(+N)입니다."
+      },
+      {
+        id: 52, stage: 2,
+        prompt: "'만약 ~가 아니라면' 조건의 [접속사]는?",
+        subtext: "If not의 뜻을 담고 있는 단어입니다.",
+        options: ["Unless", "Without"],
+        answer: 0,
+        tip: "Unless는 접속사(+S+V), Without은 전치사(+N)입니다."
+      },
+      {
+        id: 53, stage: 2,
+        prompt: "'~없이'를 의미하는 [전치사 (+ 명사구)]는?",
+        subtext: "예: _____ proper authorization, you cannot enter.",
+        options: ["Without", "Unless"],
+        answer: 0,
+        tip: "Without은 전치사입니다."
+      },
+      {
+        id: 54, stage: 2,
+        prompt: "'일단 ~하면'을 의미하는 시간/조건의 [접속사]는?",
+        subtext: "뒤에 완전한 절이 옵니다.",
+        options: ["Once", "Upon"],
+        answer: 0,
+        tip: "Once는 접속사(일단 ~하면), Upon은 전치사(~하자마자, Upon -ing)입니다."
+      },
+      {
+        id: 55, stage: 2,
+        prompt: "'~하자마자'를 의미하는 [전치사 (+ 동명사구)]는?",
+        subtext: "예: _____ receiving the email",
+        options: ["Upon", "As soon as"],
+        answer: 0,
+        tip: "Upon / On + -ing는 전치사구 표현이며, As soon as는 접속사(+S+V)입니다."
+      },
+      {
+        id: 56, stage: 2,
+        prompt: "'~에도 불구하고' 의미 중 [접속부사]는?",
+        subtext: "두 문장을 연결할 수 없고 단독으로 쓰이는 부사를 고르세요.",
+        options: ["Nevertheless", "Although"],
+        answer: 0,
+        tip: "Nevertheless는 접속부사, Although는 접속사입니다."
+      },
+      {
+        id: 57, stage: 2,
+        prompt: "'따라서 / 그러므로' 의미 중 [접속부사]는?",
+        subtext: "접속사가 아니므로 콤마로 절을 이을 수 없습니다.",
+        options: ["Therefore", "So that"],
+        answer: 0,
+        tip: "Therefore는 부사, So that은 접속사입니다."
+      },
+      {
+        id: 58, stage: 2,
+        prompt: "'~에 상관없이' 의미의 [전치사 (+ 명사구)]는?",
+        subtext: "예: _____ the weather condition",
+        options: ["Regardless of", "No matter what"],
+        answer: 0,
+        tip: "Regardless of는 전치사구입니다."
+      },
+      {
+        id: 59, stage: 2,
+        prompt: "'~하는 한' 조건을 나타내는 [접속사 (+ S + V)]는?",
+        subtext: "예: _____ supplies last",
+        options: ["As long as", "During"],
+        answer: 0,
+        tip: "As long as는 접속사입니다."
+      },
+      {
+        id: 60, stage: 2,
+        prompt: "'~에 더하여' 의미의 [전치사]는?",
+        subtext: "뒤에 명사나 -ing가 따라붙는 표현은?",
+        options: ["Besides", "Furthermore"],
+        answer: 0,
+        tip: "Besides는 전치사(~외에도)가 가능하지만, Furthermore는 오직 부사만 됩니다."
+      },
+      {
+        id: 61, stage: 2,
+        prompt: "'~할 때쯤에'를 의미하는 시간의 [접속사]는?",
+        subtext: "예: _____ he arrives, the show will start.",
+        options: ["By the time", "By"],
+        answer: 0,
+        tip: "By the time은 접속사(+S+V), By는 전치사(+특정시점)입니다."
+      },
+      {
+        id: 62, stage: 2,
+        prompt: "'특정 마감 시점까지'를 의미하는 [전치사 (+ 시점명사)]는?",
+        subtext: "예: submit the report _____ Friday.",
+        options: ["By", "By the time"],
+        answer: 0,
+        tip: "By + 시점 명사 (전치사)"
+      },
+      {
+        id: 63, stage: 2,
+        prompt: "'~대신에' 의미로 명사구를 취하는 [전치사]는?",
+        subtext: "예: _____ coffee, I drank tea.",
+        options: ["Instead of", "Instead"],
+        answer: 0,
+        tip: "Instead of는 전치사, Instead는 단독 부사입니다."
+      },
+      {
+        id: 64, stage: 2,
+        prompt: "'~라는 조건으로' if를 대체하는 [접속사]는?",
+        subtext: "예: _____ that all terms are agreed",
+        options: ["Providing that", "In case of"],
+        answer: 0,
+        tip: "Providing that은 접속사, In case of는 전치사입니다."
+      },
+      {
+        id: 65, stage: 2,
+        prompt: "'~할 때마다'를 나타내는 복합관계부사/접속사는?",
+        subtext: "예: _____ you visit our shop",
+        options: ["Whenever", "Every time of"],
+        answer: 0,
+        tip: "Whenever는 부사절 접속사입니다."
+      },
+      {
+        id: 66, stage: 2,
+        prompt: "'~때문에' 원인을 나타내는 전치사는?",
+        subtext: "예: _____ the unexpected financial crisis",
+        options: ["On account of", "Since that"],
+        answer: 0,
+        tip: "On account of는 전치사구입니다."
+      },
+      {
+        id: 67, stage: 2,
+        prompt: "'~에도 불구하고'를 뜻하는 접속사 쌍을 고르세요.",
+        subtext: "절을 이끌 수 있는 짝은?",
+        options: ["Even if", "In spite of"],
+        answer: 0,
+        tip: "Even if는 양보 접속사, In spite of는 전치사입니다."
+      },
+      {
+        id: 68, stage: 2,
+        prompt: "'~하기 위해' 목적으로 to부정사를 이끄는 것은?",
+        subtext: "예: _____ increase sales revenue",
+        options: ["In order to", "In order that"],
+        answer: 0,
+        tip: "In order to + 동사원형 / In order that + S + V"
+      },
+      {
+        id: 69, stage: 2,
+        prompt: "'~와 달리'를 뜻하는 대조의 [전치사 (+ 명사)]는?",
+        subtext: "예: _____ previous models, this one is light.",
+        options: ["Unlike", "Whereas"],
+        answer: 0,
+        tip: "Unlike는 전치사, Whereas는 두 절을 비교하는 접속사입니다."
+      },
+      {
+        id: 70, stage: 2,
+        prompt: "'반면에'를 뜻하는 대조의 [접속사 (+ S + V)]는?",
+        subtext: "두 문장을 대조적으로 연결합니다.",
+        options: ["Whereas", "Unlike"],
+        answer: 0,
+        tip: "Whereas는 접속사, Unlike는 전치사입니다."
+      },
+
+      /* ================= STEP 3: 실전 Part 5 문장 스캔 (71 ~ 100번) ================= */
+      {
+        id: 71, stage: 3,
+        prompt: "_____ the severe snowstorm, the flight to Chicago departed on schedule.",
+        subtext: "[빈칸 뒤] the severe snowstorm (동사 없는 순수 명사구)",
+        options: ["Although", "Despite", "Even though", "However"],
+        answer: 1,
+        tip: "빈칸 뒤에 동사가 없는 명사구(the severe snowstorm)가 왔으므로 양보 전치사인 Despite가 정답입니다. Although/Even though는 접속사, However는 부사입니다."
+      },
+      {
+        id: 72, stage: 3,
+        prompt: "The marketing director approved the proposal _____ it exceeded the original budget.",
+        subtext: "[빈칸 뒤] it(S) exceeded(V) the original budget(O)",
+        options: ["because of", "even though", "despite", "regardless of"],
+        answer: 1,
+        tip: "빈칸 뒤에 주어(it)와 동사(exceeded)를 갖춘 완전한 절이 오므로 양보 접속사 even though가 정답입니다."
+      },
+      {
+        id: 73, stage: 3,
+        prompt: "Please notify the facilities team immediately _____ equipment malfunction.",
+        subtext: "[빈칸 뒤] equipment malfunction (명사구)",
+        options: ["in the event of", "in case", "if", "now that"],
+        answer: 0,
+        tip: "빈칸 뒤에 명사구(equipment malfunction)만 있으므로 전치사구인 in the event of가 정답입니다."
+      },
+      {
+        id: 74, stage: 3,
+        prompt: "Sales surged rapidly last quarter; _____, overall profits remained flat due to production costs.",
+        subtext: "[단서] 세미콜론(;)과 콤마(,) 사이에 위치한 자리!",
+        options: ["although", "however", "despite", "because"],
+        answer: 1,
+        tip: "세미콜론 뒤에서 콤마와 함께 앞뒤 문맥을 연결하는 자리는 접속부사의 고유 자리이므로 however가 정답입니다."
+      },
+      {
+        id: 75, stage: 3,
+        prompt: "The seminar has been postponed _____ technical difficulties with the projector.",
+        subtext: "[빈칸 뒤] technical difficulties (명사구)",
+        options: ["due to", "because", "since", "as"],
+        answer: 0,
+        tip: "명사구 앞이므로 이유 전치사 due to가 알맞습니다. because, since, as는 절을 이끄는 접속사입니다."
+      },
+      {
+        id: 76, stage: 3,
+        prompt: "Ms. Patel reviewed the quarterly financial statements _____ she was waiting for the board meeting.",
+        subtext: "[빈칸 뒤] she(S) was waiting(V)",
+        options: ["during", "while", "despite", "for"],
+        answer: 1,
+        tip: "주어(she)와 동사(was waiting)가 뒤따르므로 시간 접속사 while이 정답입니다. during은 전치사이므로 탈락."
+      },
+      {
+        id: 77, stage: 3,
+        prompt: "All employees must wear safety goggles _____ the construction area.",
+        subtext: "[빈칸 뒤] entering the construction area (동명사구)",
+        options: ["when entering", "during enter", "because of enter", "as soon as enter"],
+        answer: 0,
+        tip: "when + -ing (분사구문 축약). when entering이 자연스러우며 during 뒤에는 순수 명사가 오지 동명사는 오지 않습니다."
+      },
+      {
+        id: 78, stage: 3,
+        prompt: "_____ Ms. Watson has finalized the agreement, the team can initiate production.",
+        subtext: "[빈칸 뒤] Ms. Watson(S) has finalized(V) the agreement",
+        options: ["Now that", "Because of", "Owing to", "On account of"],
+        answer: 0,
+        tip: "주어+동사가 있는 완전한 절이므로 '이제 ~이므로'의 접속사 Now that이 정답입니다."
+      },
+      {
+        id: 79, stage: 3,
+        prompt: "Mr. Kim did not receive the shipment on time _____ placing the order two weeks in advance.",
+        subtext: "[빈칸 뒤] placing the order (동명사구)",
+        options: ["in spite of", "although", "even though", "whereas"],
+        answer: 0,
+        tip: "동명사구 앞에는 전치사가 와야 하므로 in spite of가 정답입니다."
+      },
+      {
+        id: 80, stage: 3,
+        prompt: "The cafeteria is closed for repairs; _____, boxed lunches are provided on the 3rd floor.",
+        subtext: "[자리] 세미콜론 뒤, 콤마 앞의 문장 수식 부사",
+        options: ["therefore", "because", "unless", "in order that"],
+        answer: 0,
+        tip: "접속부사 자리입니다. 인과관계를 나타내는 therefore가 정답입니다."
+      },
+      {
+        id: 81, stage: 3,
+        prompt: "You will not be allowed to enter the laboratory _____ you possess a valid security badge.",
+        subtext: "[빈칸 뒤] you(S) possess(V) a valid security badge",
+        options: ["unless", "without", "except for", "instead of"],
+        answer: 0,
+        tip: "절(S+V)을 이끄는 조건 접속사는 unless입니다. without, except for, instead of는 모두 전치사입니다."
+      },
+      {
+        id: 82, stage: 3,
+        prompt: "The workshop will start promptly at 9 A.M., _____ of the weather conditions.",
+        subtext: "[숙어] _____ of the weather",
+        options: ["regardless", "in spite", "despite", "although"],
+        answer: 0,
+        tip: "regardless of (~에 상관없이) 전치사구 완성 문제입니다."
+      },
+      {
+        id: 83, stage: 3,
+        prompt: "The CEO requested that the presentation be concise _____ attendees remain engaged.",
+        subtext: "[빈칸 뒤] attendees(S) remain(V) engaged (목적절)",
+        options: ["so that", "in order to", "owing to", "because of"],
+        answer: 0,
+        tip: "주어와 동사가 오는 목적절이므로 so that이 정답입니다."
+      },
+      {
+        id: 84, stage: 3,
+        prompt: "_____ her extensive experience in finance, Ms. Gomez was selected for the advisory committee.",
+        subtext: "[빈칸 뒤] her extensive experience in finance (명사구)",
+        options: ["Owing to", "Because", "Since", "As"],
+        answer: 0,
+        tip: "명사구 앞이므로 이유 전치사 Owing to가 정답입니다."
+      },
+      {
+        id: 85, stage: 3,
+        prompt: "We cannot process your travel reimbursement _____ you submit original receipts.",
+        subtext: "[빈칸 뒤] you(S) submit(V) original receipts",
+        options: ["until", "during", "despite", "regardless of"],
+        answer: 0,
+        tip: "until은 접속사로 쓰여 '~할 때까지'의 절을 이끌 수 있습니다."
+      },
+      {
+        id: 86, stage: 3,
+        prompt: "Visitors must sign the logbook _____ arriving at the main reception lobby.",
+        subtext: "[빈칸 뒤] arriving at the main reception lobby (동명사구)",
+        options: ["upon", "as soon as", "while", "during"],
+        answer: 0,
+        tip: "upon + -ing (~하자마자) 전치사 표현입니다."
+      },
+      {
+        id: 87, stage: 3,
+        prompt: "_____ three decades of service, the chief architect announced his upcoming retirement.",
+        subtext: "[빈칸 뒤] three decades of service (숫자 기간 명사)",
+        options: ["After", "Since", "While", "As"],
+        answer: 0,
+        tip: "After는 전치사로 뒤에 명사구가 올 수 있습니다."
+      },
+      {
+        id: 88, stage: 3,
+        prompt: "The candidate was very articulate during the interview; _____, her technical portfolio was lacking.",
+        subtext: "[단서] 대조를 나타내는 접속부사 자리",
+        options: ["nonetheless", "although", "even though", "despite"],
+        answer: 0,
+        tip: "세미콜론과 콤마 사이에 위치하여 양보를 나타내는 접속부사는 nonetheless입니다."
+      },
+      {
+        id: 89, stage: 3,
+        prompt: "The factory will operate at full capacity _____ all required safety certifications are renewed.",
+        subtext: "[빈칸 뒤] all required safety certifications(S) are renewed(V)",
+        options: ["provided that", "in case of", "on account of", "owing to"],
+        answer: 0,
+        tip: "조건 접속사인 provided that(+S+V)이 정답입니다."
+      },
+      {
+        id: 90, stage: 3,
+        prompt: "The online warranty covers all mechanical failures _____ damage caused by accidental water immersion.",
+        subtext: "[빈칸 뒤] damage caused by accidental water immersion (명사구)",
+        options: ["except for", "except that", "unless", "although"],
+        answer: 0,
+        tip: "명사구 앞에 예외를 나타내는 전치사는 except for입니다."
+      },
+      {
+        id: 91, stage: 3,
+        prompt: "_____ the train was delayed by 30 minutes, Dr. Lawson arrived at the keynote hall on time.",
+        subtext: "[빈칸 뒤] the train(S) was delayed(V)",
+        options: ["Although", "Despite", "In spite of", "Regardless of"],
+        answer: 0,
+        tip: "절(S+V)이 뒤따르므로 양보 접속사 Although가 정답입니다."
+      },
+      {
+        id: 92, stage: 3,
+        prompt: "The executive team holds a town hall briefing _____ a quarterly basis.",
+        subtext: "[전치사 콜로케이션] _____ a quarterly basis",
+        options: ["on", "in", "at", "by"],
+        answer: 0,
+        tip: "on a ~ basis (~한 주기로, 원칙으로)는 빈출 전치사 숙어입니다."
+      },
+      {
+        id: 93, stage: 3,
+        prompt: "_____ the contract has been signed by both parties, the legal dispute is officially resolved.",
+        subtext: "[빈칸 뒤] the contract(S) has been signed(V)",
+        options: ["Since", "Because of", "Due to", "Owing to"],
+        answer: 0,
+        tip: "절을 이끄는 이유 접속사는 Since입니다."
+      },
+      {
+        id: 94, stage: 3,
+        prompt: "Please keep all emergency exits unobstructed _____ the scheduled building inspection.",
+        subtext: "[빈칸 뒤] the scheduled building inspection (특정 명사)",
+        options: ["during", "while", "as", "whereas"],
+        answer: 0,
+        tip: "특정 행사/사건 명사이므로 전치사 during이 정답입니다."
+      },
+      {
+        id: 95, stage: 3,
+        prompt: "The flight attendant instructed passengers to stay seated _____ the aircraft reached the terminal gate.",
+        subtext: "[빈칸 뒤] the aircraft(S) reached(V) the terminal gate",
+        options: ["until", "during", "by", "prior to"],
+        answer: 0,
+        tip: "절을 이끌어 행위의 지속 한계를 나타내는 접속사 until이 정답입니다."
+      },
+      {
+        id: 96, stage: 3,
+        prompt: "The system upgrade will proceed tonight _____ any unforeseen network stability issues arise.",
+        subtext: "[빈칸 뒤] any unforeseen network stability issues(S) arise(V)",
+        options: ["unless", "without", "except for", "in spite of"],
+        answer: 0,
+        tip: "주어와 동사가 있으므로 조건 접속사 unless가 정답입니다."
+      },
+      {
+        id: 97, stage: 3,
+        prompt: "The manager has not authorized the refund _____ receiving a written confirmation from head office.",
+        subtext: "[빈칸 뒤] receiving a written confirmation (동명사구)",
+        options: ["without", "unless", "so that", "provided that"],
+        answer: 0,
+        tip: "동명사구(-ing) 앞이므로 전치사 without이 정답입니다."
+      },
+      {
+        id: 98, stage: 3,
+        prompt: "Our European branch exceeded its target; _____, the domestic division suffered a minor drop.",
+        subtext: "[자리] 세미콜론 뒤, 콤마 앞 대조 부사",
+        options: ["in contrast", "while", "although", "whereas"],
+        answer: 0,
+        tip: "세미콜론과 콤마 사이에 단독으로 쓰이는 전치사구 형태의 접속부사는 in contrast입니다."
+      },
+      {
+        id: 99, stage: 3,
+        prompt: "All personnel must sign out _____ leaving the research facility after hours.",
+        subtext: "[빈칸 뒤] leaving the research facility (동명사)",
+        options: ["before", "during", "while of", "as"],
+        answer: 0,
+        tip: "before는 전치사로 뒤에 동명사(-ing)를 취할 수 있습니다."
+      },
+      {
+        id: 100, stage: 3,
+        prompt: "The prototype was approved for trial production _____ meeting all safety guidelines.",
+        subtext: "[빈칸 뒤] meeting all safety guidelines (동명사구)",
+        options: ["upon", "once", "as soon as", "now that"],
+        answer: 0,
+        tip: "upon + -ing (~하자마자, ~한 직후에) 형태의 전치사 표현입니다."
+      }
+    ];
+
+    const app = {
+      db: fullDatabase,
+      unlockedStage: 1,     // Highest unlocked stage (1, 2, or 3)
+      stageMastered: { 1: false, 2: false, 3: false },
+      currentStage: 1,      // Stage currently in session
+      isWrongRetryMode: false,
+      
+      // Active run queues
+      currentQueue: [],
+      currentIndex: 0,
+      initialScore: 0,
+      streak: 0,
+      
+      // Stage session error collection
+      currentStageFailedIds: new Set(),
+      isAnswered: false,
+
+      init() {
+        this.loadProgress();
+        this.renderStageGatesUI();
+      },
+
+      loadProgress() {
+        try {
+          const savedUnlocked = localStorage.getItem('toeic_gate_unlocked');
+          if (savedUnlocked) {
+            this.unlockedStage = parseInt(savedUnlocked, 10);
+          }
+          const savedMastered = localStorage.getItem('toeic_gate_mastered');
+          if (savedMastered) {
+            this.stageMastered = JSON.parse(savedMastered);
+          }
+        } catch(e) {
+          console.warn("Storage warning", e);
+        }
+      },
+
+      saveProgress() {
+        try {
+          localStorage.setItem('toeic_gate_unlocked', this.unlockedStage);
+          localStorage.setItem('toeic_gate_mastered', JSON.stringify(this.stageMastered));
+        } catch(e) {}
+      },
+
+      // Update Dashboard & Top step indicators
+      renderStageGatesUI() {
+        // Step nav at top
+        for (let s = 1; s <= 3; s++) {
+          const navEl = document.getElementById(`step-nav-${s}`);
+          const iconEl = document.getElementById(`step-nav-icon-${s}`);
+          const isMastered = this.stageMastered[s];
+          const isUnlocked = s <= this.unlockedStage;
+
+          if (isMastered) {
+            navEl.className = "py-1 px-2 rounded-lg bg-emerald-600 text-white flex items-center justify-center gap-1.5 shadow-xs";
+            iconEl.className = "fa-solid fa-circle-check text-white ml-0.5";
+          } else if (isUnlocked) {
+            navEl.className = "py-1 px-2 rounded-lg bg-indigo-600 text-white flex items-center justify-center gap-1.5 shadow-xs";
+            iconEl.className = "fa-solid fa-clock text-amber-300 ml-0.5";
+          } else {
+            navEl.className = "py-1 px-2 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center gap-1.5";
+            iconEl.className = "fa-solid fa-lock text-slate-500 ml-0.5";
+          }
+        }
+
+        // Hero CTA button & badge
+        const heroActionBtn = document.getElementById('hero-action-btn-text');
+        const heroStatusPill = document.getElementById('hero-status-pill');
+
+        if (this.unlockedStage === 1 && !this.stageMastered[1]) {
+          heroActionBtn.textContent = "Step 1 도전하기";
+          heroStatusPill.textContent = "Step 1 진행 중 (0 / 35)";
+        } else if (this.unlockedStage >= 2 && !this.stageMastered[2]) {
+          heroActionBtn.textContent = "Step 2 도전하기";
+          heroStatusPill.textContent = "Step 1 마스터됨 ✨ ➔ Step 2 진행 중";
+        } else if (this.unlockedStage >= 3 && !this.stageMastered[3]) {
+          heroActionBtn.textContent = "Step 3 최종 도전하기";
+          heroStatusPill.textContent = "Step 2 마스터됨 ✨ ➔ Step 3 진행 중";
+        } else {
+          heroActionBtn.textContent = "전체 마스터 복습하기";
+          heroStatusPill.textContent = "🎉 100제 전체 마스터 달성!";
+        }
+
+        // Stage 1 Card UI
+        const p1 = document.getElementById('progress-stage-1');
+        const b1 = document.getElementById('badge-stage-1');
+        if (this.stageMastered[1]) {
+          b1.className = "px-2 py-0.5 rounded text-[11px] font-extrabold bg-emerald-100 text-emerald-700";
+          b1.textContent = "마스터 완료 ✨";
+          p1.textContent = "35 / 35";
+        } else {
+          b1.className = "px-2 py-0.5 rounded text-[11px] font-extrabold bg-indigo-100 text-indigo-700";
+          b1.textContent = "진행 중";
+          p1.textContent = "0 / 35";
+        }
+
+        // Stage 2 Card UI
+        const c2 = document.getElementById('card-stage-2');
+        const icon2 = document.getElementById('icon-stage-2');
+        const t2 = document.getElementById('title-stage-2');
+        const b2 = document.getElementById('badge-stage-2');
+        const p2 = document.getElementById('progress-stage-2');
+
+        if (this.unlockedStage >= 2) {
+          c2.className = "cursor-pointer bg-white p-5 rounded-2xl border-2 border-emerald-500 shadow-md transition-all relative overflow-hidden";
+          icon2.className = "w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-black text-lg";
+          icon2.innerHTML = "2";
+          t2.className = "text-base md:text-lg font-bold text-slate-900";
+          
+          if (this.stageMastered[2]) {
+            b2.className = "px-2 py-0.5 rounded text-[11px] font-extrabold bg-emerald-100 text-emerald-700";
+            b2.textContent = "마스터 완료 ✨";
+            p2.textContent = "35 / 35";
+          } else {
+            b2.className = "px-2 py-0.5 rounded text-[11px] font-extrabold bg-emerald-100 text-emerald-700";
+            b2.textContent = "잠금 해제됨";
+            p2.textContent = "0 / 35";
+          }
+        } else {
+          c2.className = "cursor-not-allowed bg-slate-50/80 p-5 rounded-2xl border-2 border-dashed border-slate-200 transition-all relative opacity-75";
+          icon2.className = "w-12 h-12 rounded-xl bg-slate-200 text-slate-400 flex items-center justify-center font-black text-lg";
+          icon2.innerHTML = '<i class="fa-solid fa-lock text-base"></i>';
+          t2.className = "text-base md:text-lg font-bold text-slate-400";
+          b2.className = "px-2 py-0.5 rounded text-[11px] font-extrabold bg-slate-200 text-slate-500";
+          b2.textContent = "잠김 🔒";
+          p2.textContent = "0 / 35";
+        }
+
+        // Stage 3 Card UI
+        const c3 = document.getElementById('card-stage-3');
+        const icon3 = document.getElementById('icon-stage-3');
+        const t3 = document.getElementById('title-stage-3');
+        const b3 = document.getElementById('badge-stage-3');
+        const p3 = document.getElementById('progress-stage-3');
+
+        if (this.unlockedStage >= 3) {
+          c3.className = "cursor-pointer bg-white p-5 rounded-2xl border-2 border-amber-500 shadow-md transition-all relative overflow-hidden";
+          icon3.className = "w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-black text-lg";
+          icon3.innerHTML = "3";
+          t3.className = "text-base md:text-lg font-bold text-slate-900";
+          
+          if (this.stageMastered[3]) {
+            b3.className = "px-2 py-0.5 rounded text-[11px] font-extrabold bg-emerald-100 text-emerald-700";
+            b3.textContent = "마스터 완료 ✨";
+            p3.textContent = "30 / 30";
+          } else {
+            b3.className = "px-2 py-0.5 rounded text-[11px] font-extrabold bg-amber-100 text-amber-700";
+            b3.textContent = "잠금 해제됨";
+            p3.textContent = "0 / 30";
+          }
+        } else {
+          c3.className = "cursor-not-allowed bg-slate-50/80 p-5 rounded-2xl border-2 border-dashed border-slate-200 transition-all relative opacity-75";
+          icon3.className = "w-12 h-12 rounded-xl bg-slate-200 text-slate-400 flex items-center justify-center font-black text-lg";
+          icon3.innerHTML = '<i class="fa-solid fa-lock text-base"></i>';
+          t3.className = "text-base md:text-lg font-bold text-slate-400";
+          b3.className = "px-2 py-0.5 rounded text-[11px] font-extrabold bg-slate-200 text-slate-500";
+          b3.textContent = "잠김 🔒";
+          p3.textContent = "0 / 30";
+        }
+      },
+
+      showHome() {
+        this.hideAllViews();
+        document.getElementById('view-home').classList.remove('hidden');
+        this.renderStageGatesUI();
+      },
+
+      showCheatSheet() {
+        this.hideAllViews();
+        document.getElementById('view-cheat-sheet').classList.remove('hidden');
+      },
+
+      hideAllViews() {
+        document.getElementById('view-home').classList.add('hidden');
+        document.getElementById('view-quiz').classList.add('hidden');
+        document.getElementById('view-stage-result').classList.add('hidden');
+        document.getElementById('view-cheat-sheet').classList.add('hidden');
+      },
+
+      tryStartStage(stageNumber) {
+        if (stageNumber > this.unlockedStage) {
+          alert(`Step ${stageNumber - 1}의 모든 문제와 오답을 마스터해야 잠금이 해제됩니다!`);
+          return;
+        }
+        this.startStage(stageNumber);
+      },
+
+      startCurrentActiveStage() {
+        if (this.unlockedStage === 1 && !this.stageMastered[1]) {
+          this.startStage(1);
+        } else if (this.unlockedStage === 2 && !this.stageMastered[2]) {
+          this.startStage(2);
+        } else if (this.unlockedStage === 3 && !this.stageMastered[3]) {
+          this.startStage(3);
+        } else {
+          this.startStage(1);
+        }
+      },
+
+      startStage(stageNumber) {
+        this.currentStage = stageNumber;
+        this.isWrongRetryMode = false;
+        this.currentStageFailedIds.clear();
+        this.initialScore = 0;
+        this.streak = 0;
+
+        // Load all questions for this stage
+        this.currentQueue = this.db.filter(q => q.stage === stageNumber);
+        this.currentIndex = 0;
+
+        this.hideAllViews();
+        document.getElementById('view-quiz').classList.remove('hidden');
+        document.getElementById('quiz-mode-pill').classList.add('hidden');
+        this.renderQuestion();
+      },
+
+      renderQuestion() {
+        this.isAnswered = false;
+        const q = this.currentQueue[this.currentIndex];
+
+        // Badges
+        const stageBadge = document.getElementById('quiz-stage-badge');
+        stageBadge.textContent = `STEP ${q.stage}`;
+        if (q.stage === 1) stageBadge.className = "px-2.5 py-1 rounded-full text-xs font-black bg-indigo-100 text-indigo-700";
+        if (q.stage === 2) stageBadge.className = "px-2.5 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-700";
+        if (q.stage === 3) stageBadge.className = "px-2.5 py-1 rounded-full text-xs font-black bg-amber-100 text-amber-700";
+
+        const modePill = document.getElementById('quiz-mode-pill');
+        if (this.isWrongRetryMode) {
+          modePill.classList.remove('hidden');
+        } else {
+          modePill.classList.add('hidden');
+        }
+
+        document.getElementById('quiz-counter').textContent = `Q. ${this.currentIndex + 1} / ${this.currentQueue.length}`;
+        document.getElementById('quiz-streak').innerHTML = `<i class="fa-solid fa-fire mr-1"></i> ${this.streak} 콤보`;
+
+        const instructions = {
+          1: "다음에 제시된 단어의 정확한 [품사/기능]을 선택하세요",
+          2: "조건과 문맥에 알맞은 [짝꿍 표현]을 고르세요",
+          3: "빈칸 뒤 구조(절 vs 명사구)를 스캔하여 5초 안에 정답을 고르세요"
+        };
+        document.getElementById('quiz-instruction').textContent = instructions[q.stage] || "알맞은 정답을 고르세요";
+        document.getElementById('quiz-question-text').textContent = q.prompt;
+        document.getElementById('quiz-subtext').textContent = q.subtext || "";
+
+        // Reset feedback
+        document.getElementById('quiz-feedback-box').classList.add('hidden');
+
+        // Options
+        const container = document.getElementById('quiz-options-container');
+        container.innerHTML = "";
+
+        q.options.forEach((optText, idx) => {
+          const btn = document.createElement('button');
+          btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-indigo-400 transition-all font-semibold text-slate-800 text-sm md:text-base flex items-center justify-between shadow-xs active:scale-[0.99]";
+          btn.innerHTML = `
+            <div class="flex items-center space-x-3">
+              <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">${['A','B','C','D'][idx]}</span>
+              <span>${optText}</span>
+            </div>
+            <i class="fa-regular fa-circle text-slate-300 text-sm opt-indicator"></i>
+          `;
+          btn.onclick = () => this.handleOptionClick(idx);
+          container.appendChild(btn);
+        });
+      },
+
+      handleOptionClick(selectedIdx) {
+        if (this.isAnswered) return;
+        this.isAnswered = true;
+
+        const q = this.currentQueue[this.currentIndex];
+        const isCorrect = (selectedIdx === q.answer);
+        const optionsContainer = document.getElementById('quiz-options-container');
+        const buttons = optionsContainer.querySelectorAll('button');
+
+        buttons.forEach((btn, idx) => {
+          btn.disabled = true;
+          const indicator = btn.querySelector('.opt-indicator');
+          if (idx === q.answer) {
+            btn.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-sm md:text-base flex items-center justify-between shadow-sm";
+            indicator.className = "fa-solid fa-circle-check text-emerald-600 text-lg";
+          } else if (idx === selectedIdx && !isCorrect) {
+            btn.className = "w-full text-left p-4 rounded-xl border-2 border-rose-400 bg-rose-50 text-rose-900 font-semibold text-sm md:text-base flex items-center justify-between shadow-sm";
+            indicator.className = "fa-solid fa-circle-xmark text-rose-500 text-lg";
+          } else {
+            btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 bg-slate-50 text-slate-400 font-normal text-sm md:text-base flex items-center justify-between opacity-50";
+          }
+        });
+
+        if (isCorrect) {
+          this.streak++;
+          if (!this.isWrongRetryMode) {
+            this.initialScore++;
+          } else {
+            // In retry mode, successful answer removes it from failed set
+            this.currentStageFailedIds.delete(q.id);
+          }
+        } else {
+          this.streak = 0;
+          this.currentStageFailedIds.add(q.id);
+        }
+
+        // Show detailed feedback card
+        const feedbackBox = document.getElementById('quiz-feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackDesc = document.getElementById('feedback-desc');
+        const feedbackPoint = document.getElementById('feedback-point');
+
+        feedbackBox.classList.remove('hidden');
+        if (isCorrect) {
+          feedbackBox.className = "mt-6 p-4 rounded-2xl border border-emerald-200 bg-emerald-50 text-emerald-950";
+          feedbackIcon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i>`;
+          feedbackTitle.textContent = "정답입니다!";
+        } else {
+          feedbackBox.className = "mt-6 p-4 rounded-2xl border border-rose-200 bg-rose-50 text-rose-950";
+          feedbackIcon.innerHTML = `<i class="fa-solid fa-circle-exclamation text-rose-600"></i>`;
+          feedbackTitle.textContent = `오답입니다! 정답은 [ ${['A','B','C','D'][q.answer]} ] 입니다.`;
+        }
+
+        feedbackDesc.textContent = q.tip;
+        feedbackPoint.innerHTML = `<strong>출제 단서:</strong> ${q.subtext || "품사와 뒷구조를 확인하세요."}`;
+      },
+
+      nextQuestion() {
+        this.currentIndex++;
+        if (this.currentIndex < this.currentQueue.length) {
+          this.renderQuestion();
+        } else {
+          this.evaluateStageRunEnd();
+        }
+      },
+
+      // Evaluates if user passes mastery gate
+      evaluateStageRunEnd() {
+        this.hideAllViews();
+        document.getElementById('view-stage-result').classList.remove('hidden');
+
+        const wrongCount = this.currentStageFailedIds.size;
+        const totalStageQuestions = this.db.filter(q => q.stage === this.currentStage).length;
+
+        const gateIcon = document.getElementById('gate-icon');
+        const gateTitle = document.getElementById('gate-title');
+        const gateDesc = document.getElementById('gate-desc');
+        const scoreText = document.getElementById('gate-score-text');
+        const wrongText = document.getElementById('gate-wrong-count');
+        const btnRetry = document.getElementById('btn-clear-wrongs');
+        const btnRetryLabel = document.getElementById('btn-clear-wrongs-label');
+        const btnNext = document.getElementById('btn-next-stage');
+        const btnNextLabel = document.getElementById('btn-next-stage-label');
+
+        scoreText.textContent = `${totalStageQuestions - wrongCount} / ${totalStageQuestions}`;
+        wrongText.textContent = `${wrongCount}개`;
+
+        if (wrongCount === 0) {
+          // 100% Cleared! Unlock next stage!
+          this.stageMastered[this.currentStage] = true;
+          if (this.currentStage === 1 && this.unlockedStage < 2) this.unlockedStage = 2;
+          if (this.currentStage === 2 && this.unlockedStage < 3) this.unlockedStage = 3;
+          this.saveProgress();
+
+          gateIcon.className = "w-16 h-16 rounded-full mx-auto flex items-center justify-center text-3xl mb-4 bg-emerald-100 text-emerald-600 animate-bounce-gentle";
+          gateIcon.innerHTML = `<i class="fa-solid fa-trophy"></i>`;
+          gateTitle.textContent = `🎉 Step ${this.currentStage} 100% 완벽 마스터!`;
+          
+          if (this.currentStage < 3) {
+            gateDesc.textContent = `모든 문제를 한 번의 오차 없이 정복했습니다! Step ${this.currentStage + 1} 자물쇠가 풀렸습니다.`;
+            btnRetry.classList.add('hidden');
+            btnNext.classList.remove('hidden');
+            btnNextLabel.textContent = `Step ${this.currentStage + 1} 시작하기 ➔`;
+          } else {
+            gateDesc.textContent = "축하합니다! 토익 빈출 접·전·부 100문제를 모두 완벽하게 정복하셨습니다!";
+            btnRetry.classList.add('hidden');
+            btnNext.classList.remove('hidden');
+            btnNextLabel.textContent = "홈 화면으로 이동하기";
+          }
+        } else {
+          // Still have failed questions -> Trigger retry gate
+          gateIcon.className = "w-16 h-16 rounded-full mx-auto flex items-center justify-center text-3xl mb-4 bg-rose-100 text-rose-600";
+          gateIcon.innerHTML = `<i class="fa-solid fa-lock"></i>`;
+          gateTitle.textContent = `Step ${this.currentStage} 잠금 해제 대기 중`;
+          gateDesc.textContent = `틀린 문제(${wrongCount}개)를 다시 풀어 모두 맞혀야 다음 단계가 열립니다!`;
+          
+          btnRetry.classList.remove('hidden');
+          btnRetryLabel.textContent = `오답 ${wrongCount}문제 바로잡기 (클리어 챌린지)`;
+          btnNext.classList.add('hidden');
+        }
+      },
+
+      startWrongRetryLoop() {
+        if (this.currentStageFailedIds.size === 0) return;
+
+        this.isWrongRetryMode = true;
+        const failedArray = Array.from(this.currentStageFailedIds);
+        // Load only questions that failed
+        this.currentQueue = this.db.filter(q => failedArray.includes(q.id));
+        this.currentIndex = 0;
+        this.streak = 0;
+
+        this.hideAllViews();
+        document.getElementById('view-quiz').classList.remove('hidden');
+        this.renderQuestion();
+      },
+
+      proceedToNextStage() {
+        if (this.currentStage < 3) {
+          this.startStage(this.currentStage + 1);
+        } else {
+          this.showHome();
+        }
+      },
+
+      resetAllProgressModal() {
+        if (confirm("학습 기록과 잠금 해제 상태를 초기화하고 Step 1부터 다시 시작하시겠습니까?")) {
+          this.unlockedStage = 1;
+          this.stageMastered = { 1: false, 2: false, 3: false };
+          this.saveProgress();
+          this.showHome();
+        }
+      }
+    };
+
+    window.onload = function() {
+      app.init();
+    };
+  </script>
+</body>
+</html>
